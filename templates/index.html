@@ -1,0 +1,38 @@
+{{ template "header.html" .}}
+
+  <h1>{{ .title }}!</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Link</th>
+        <th scope="col">Last checked</th>
+        <th scope="col">Is Up</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .sites}}
+      <tr>
+        <th scope="row">{{.ID}}</th>
+        <td>{{.Name}}</td>
+        <td><a rel="noreferrer" target="blank" href={{.Link}}>{{.Link}}</a></td>
+        <td>{{.LastChecked}}</td>
+        <td><span title="{{if .IsUp}} Available {{ else }} Down {{end}}" class="dot {{if .IsUp}} bg-success {{ else }} bg-danger {{end}}"></span></td>
+      </tr>
+      {{end}}
+    </tbody>
+    <style>
+      .dot {
+          height: 25px;
+          width: 25px;
+          background-color: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+          margin-top: 5px;
+        }
+    </style>
+  </table>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
